@@ -1,0 +1,105 @@
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Escape Room da Matéria — Online</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="app">
+  <header>
+    <div>
+      <div class="brand">🧪 ESCAPE ROOM DA MATÉRIA</div>
+      <div class="subtitle">Missão: Fuga do Laboratório</div>
+    </div>
+    <div id="connection" class="pill">● conectando...</div>
+  </header>
+
+  <main>
+    <section id="home" class="screen active">
+      <div class="hero">
+        <div class="hero-icon">⚗️</div>
+        <h1>Escape Room da Matéria</h1>
+        <p>Estados da matéria • Mudanças de estado • Misturas • Separação</p>
+        <div class="home-buttons">
+          <button class="primary" onclick="show('teacher')">👨‍🏫 Sou Professor</button>
+          <button class="secondary" onclick="show('student')">🎮 Sou Aluno</button>
+        </div>
+        <div class="note">Versão online multiplayer • 3 vidas • 90 segundos por desafio • ranking ao vivo</div>
+      </div>
+    </section>
+
+    <section id="teacher" class="screen">
+      <div class="card">
+        <h2>👨‍🏫 Painel do Professor</h2>
+        <p class="muted">Crie uma sala e projete o código para a turma.</p>
+        <button class="primary" onclick="createRoom()">CRIAR NOVA SALA</button>
+        <div id="teacherRoom" class="hidden">
+          <div class="roomcode"><span>CÓDIGO DA SALA</span><strong id="roomCode">-----</strong></div>
+          <p>Compartilhe este código com os alunos.</p>
+          <div class="teacher-actions">
+            <button class="primary" onclick="startGame()">▶ INICIAR JOGO</button>
+            <button class="secondary" onclick="nextQuestion()">⏭ PRÓXIMO DESAFIO</button>
+          </div>
+          <div id="teacherStatus" class="status">Aguardando alunos...</div>
+          <h3>🏆 Ranking ao vivo</h3>
+          <div id="teacherRanking"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="student" class="screen">
+      <div class="card">
+        <h2>🎮 Entrar na missão</h2>
+        <label>Código da sala</label>
+        <input id="joinCode" maxlength="5" placeholder="EX.: ABC12" autocomplete="off">
+        <label>Seu nome</label>
+        <input id="playerName" maxlength="24" placeholder="Digite seu nome" autocomplete="off">
+        <button class="primary" onclick="joinRoom()">ENTRAR NA SALA</button>
+        <div id="studentError" class="error"></div>
+      </div>
+    </section>
+
+    <section id="lobby" class="screen">
+      <div class="card center">
+        <div class="big-icon">🚪</div>
+        <h2>Sala <span id="lobbyCode"></span></h2>
+        <p>Você entrou! Aguarde o professor iniciar a missão.</p>
+        <div id="lobbyPlayers"></div>
+      </div>
+    </section>
+
+    <section id="game" class="screen">
+      <div class="game-top">
+        <div><span id="phaseLabel">FASE 1</span><strong id="questionCounter">1/20</strong></div>
+        <div class="timer" id="timer">01:30</div>
+        <div class="stats">❤️ <span id="lives">3</span> &nbsp; ⭐ <span id="xp">0</span> XP</div>
+      </div>
+      <div class="card question-card">
+        <div id="questionTitle" class="tag"></div>
+        <h2 id="questionText"></h2>
+        <div id="options" class="options"></div>
+        <div id="feedback" class="feedback"></div>
+      </div>
+      <div class="card mini-rank">
+        <h3>🏆 Ranking</h3>
+        <div id="studentRanking"></div>
+      </div>
+    </section>
+
+    <section id="finish" class="screen">
+      <div class="card center">
+        <div class="big-icon">🏆</div>
+        <h1>MISSÃO CONCLUÍDA!</h1>
+        <p>O laboratório foi salvo. Confira o resultado final:</p>
+        <div id="finalRanking"></div>
+        <button class="secondary" onclick="show('home')">Voltar ao início</button>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>
